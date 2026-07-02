@@ -23,7 +23,7 @@ test_that("html2excel(): html vs mhtml", {
 # Check, using summary, that the correct tables and dimensions have been found
 
 t1 <- html2excel(html, sheets = c(3, 5))
-s <- summary(t1)
+s <- print(summary(t1))
 res <- list(sheet1 = c(3, 3), sheet2 = c(5, 3))
 
 test_that("html2excel(): summary.html2excel", {
@@ -45,5 +45,18 @@ x <- suppressWarnings(
 
 test_that("html2excel(): 1 file vs directory of 2 files", {
   expect_equal(t1[[1]], x[[1]])
+})
+
+## 4
+
+# Test html2excel() for an HTML file with the incorrect .xlsx extension
+
+# Examples from html2excel()
+wrong <- system.file("extdata", "wrong_extension.xlsx", package = "html2excel")
+wrong_5 <- html2excel(wrong, sheets = 5)
+res4 <- wrong_5[[1]]$sheet1
+
+test_that("html2excel(): wrong .xlsx extension", {
+  expect_equal(res1, res4)
 })
 
