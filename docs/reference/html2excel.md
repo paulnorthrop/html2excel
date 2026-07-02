@@ -128,69 +128,16 @@ mhtml <- system.file("extdata", "tables.mhtml", package = "html2excel")
 t1 <- html2excel(html, sheets = 5)
 # The table
 t1[[1]]
-#> $sheet1
-#> # A tibble: 5 × 3
-#>   Day       Time      Location                             
-#>   <chr>     <chr>     <chr>                                
-#> 1 Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)
-#> 2 Thursday  2:30-5pm  Morro Bay Farmer's Market            
-#> 3 Thursday  6:10-9pm  Downtown SLO Farmer's Market         
-#> 4 Saturday  8-10:30am Farmer's Market new Embassy Suites   
-#> 5 Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)
-#> 
 # The dimensions of the table
 summary(t1)
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`$sheet1
-#> [1] 5 3
-#> 
-#> 
-#> attr(,"class")
-#> [1] "summary.evmissing"
 
 ## .mhtml
 # Pass UTF-8 encoding to avoid error "Unsupported encoding: 3DUTF-8"
 t2 <- html2excel(mhtml, read_args = list(encoding = "UTF-8"))
-#> Warning: NAs introduced by coercion
-#> Warning: NAs introduced by coercion
-#> Warning: NAs introduced by coercion
-#> Warning: NAs introduced by coercion
 # The same table as above
 t2[[1]][5]
-#> $sheet5
-#> # A tibble: 5 × 3
-#>   Day       Time      Location                             
-#>   <chr>     <chr>     <chr>                                
-#> 1 Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)
-#> 2 Thursday  2:30-5pm  Morro Bay Farmer's Market            
-#> 3 Thursday  6:10-9pm  Downtown SLO Farmer's Market         
-#> 4 Saturday  8-10:30am Farmer's Market new Embassy Suites   
-#> 5 Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)
-#> 
 # The dimensions of all tables
 summary(t2)
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet1
-#> [1] 6 3
-#> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet2
-#> [1] 3 4
-#> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet3
-#> [1] 3 3
-#> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet4
-#> [1] 4 3
-#> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet5
-#> [1] 5 3
-#> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet6
-#> [1] 19  5
-#> 
-#> 
-#> attr(,"class")
-#> [1] "summary.evmissing"
 
 ### A directory
 
@@ -200,14 +147,10 @@ dir <- system.file("extdata", package = "html2excel")
 # Extract tables 3 and 5 from .html and table 5 from .mhtml
 x <- html2excel(dir, ext = "*.*html", sheets = list(c(3, 5), 5),
                 read_args = list(encoding = "UTF-8"))
-#> Warning: NAs introduced by coercion
-#> Warning: NAs introduced by coercion
-#> Warning: NAs introduced by coercion
-#> Warning: NAs introduced by coercion
 
-if (FALSE) { # interactive()
+# \dontrun{
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
 x <- html2excel(url, dir = ".")
-}
+# }
 ```

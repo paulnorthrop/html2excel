@@ -114,9 +114,9 @@ dir <- system.file("extdata", package = "html2excel")
 x <- html2excel(dir, ext = "*.*html", sheets = list(c(3, 5), 5),
                 read_args = list(encoding = "UTF-8"))
 
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+\dontrun{
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
 x <- html2excel(url, dir = ".")
-\dontshow{\}) # examplesIf}
+}
 }

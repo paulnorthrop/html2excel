@@ -86,10 +86,11 @@
 #' x <- html2excel(dir, ext = "*.*html", sheets = list(c(3, 5), 5),
 #'                 read_args = list(encoding = "UTF-8"))
 #'
-#' @examplesIf interactive()
+#' \dontrun{
 #' ### A URL
 #' url <- "https://afd.calpoly.edu/web/sample-tables"
 #' x <- html2excel(url, dir = ".")
+#' }
 #' @export
 html2excel <- function(html, ext = "*.html", write = TRUE, sheets, dir,
                        read_args = list(), html_args = list(),
