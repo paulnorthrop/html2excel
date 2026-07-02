@@ -28,7 +28,7 @@ summary.html2excel <- function(object, ...) {
   }
   table_dimensions <- lapply(X = 1:length(object), FUN = dim_fn)
   names(table_dimensions) <- names(object)
-  class(table_dimensions) <- "summary.evmissing"
+  class(table_dimensions) <- "summary.html2excel"
   return(table_dimensions)
 }
 
