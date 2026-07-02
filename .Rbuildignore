@@ -4,7 +4,7 @@
 ^logo$
 ^README\.Rmd$
 ^LICENSE\.md$
-^cran_comments\.md$
+^cran-comments\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
