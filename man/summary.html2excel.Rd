@@ -14,6 +14,8 @@
 \code{\link{html2excel}}.}
 
 \item{...}{Further arguments to be passed to \code{\link{print.default}}.}
+
+\item{x}{An object returned by \code{summary.html2excel}.}
 }
 \value{
 A list containing the dimensions (number of rows and number of
