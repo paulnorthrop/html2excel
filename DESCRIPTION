@@ -2,7 +2,7 @@ Package: html2excel
 Type: Package
 Title: Convert HTML Tables to Excel Files
 Version: 1.0.0
-Date: 2026-07-01
+Date: 2026-07-03
 Authors@R: c(
     person(
       "Paul", "Northrop",
