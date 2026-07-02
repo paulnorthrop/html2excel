@@ -22,7 +22,8 @@
 #'   of the vector or list gives the number(s) of the tables to be included as
 #'   sheets in the `i`th output Excel file. This argument is recycled to the
 #'   number of output Excel files. If `sheets` is not supplied then all sheets
-#'   are included.
+#'   are included. [`summary.html2excel`] provides dimensions of the tibbles
+#'   read.
 #' @param dir A path to a directory. If `html` contains URLs then the resulting
 #'   Excel files are written to directory `dir`. If `dir` does not exist then
 #'   it is created.
@@ -51,7 +52,6 @@
 #' file will be written to a directory `output` created in the directory of the
 #' respective input file.
 #'
-#'
 #' @return An object of class `c("html2excel", "list")`. A list of (lists of)
 #'   tibbles created from objects returned from [`rvest::html_table`].
 #'   The names of the list are the input HTML filenames. Each list component
@@ -61,6 +61,9 @@
 #'   input HTML files.
 #'   If `write = TRUE` then a character vector containing the file paths to the
 #'   `.xlsx` files created is added as an attributed named `files`.
+#'
+#' @seealso [`summary.html2excel`]
+#'
 #' @examples
 #' ### HTML files
 #'
@@ -87,19 +90,19 @@
 #' ### A directory
 #'
 #' ## Contains the .html and .mhtml files above
-#' dir <- system.file("extdata", package = "html2excel")
+#' directory <- system.file("extdata", package = "html2excel")
 #' # Change the ext argument to include the .mhtml file
 #' # Extract tables 3 and 5 from .html and table 5 from .mhtml
-#' x <- html2excel(dir, ext = "*.*html", sheets = list(c(3, 5), 5),
+#' x <- html2excel(directory, ext = "*.*html", sheets = list(c(3, 5), 5),
 #'                 read_args = list(encoding = "UTF-8"))
 #'
 #' \dontrun{
 #' ### A URL
 #' url <- "https://afd.calpoly.edu/web/sample-tables"
-#' x <- html2excel(url, dir = ".")
+#' x <- html2excel(url)
 #' }
 #' @export
-html2excel <- function(html, ext = "*.html", write = TRUE, sheets, dir,
+html2excel <- function(html, ext = "*.html", write = TRUE, sheets, dir = ".",
                        read_args = list(), html_args = list(),
                        write_args = list()) {
 

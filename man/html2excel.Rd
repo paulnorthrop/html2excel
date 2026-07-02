@@ -9,7 +9,7 @@ html2excel(
   ext = "*.html",
   write = TRUE,
   sheets,
-  dir,
+  dir = ".",
   read_args = list(),
   html_args = list(),
   write_args = list()
@@ -37,7 +37,8 @@ extensions that start with \code{htm} are read.}
 of the vector or list gives the number(s) of the tables to be included as
 sheets in the \code{i}th output Excel file. This argument is recycled to the
 number of output Excel files. If \code{sheets} is not supplied then all sheets
-are included.}
+are included. \code{\link{summary.html2excel}} provides dimensions of the tibbles
+read.}
 
 \item{dir}{A path to a directory. If \code{html} contains URLs then the resulting
 Excel files are written to directory \code{dir}. If \code{dir} does not exist then
@@ -114,15 +115,18 @@ summary(t2)
 ### A directory
 
 ## Contains the .html and .mhtml files above
-dir <- system.file("extdata", package = "html2excel")
+directory <- system.file("extdata", package = "html2excel")
 # Change the ext argument to include the .mhtml file
 # Extract tables 3 and 5 from .html and table 5 from .mhtml
-x <- html2excel(dir, ext = "*.*html", sheets = list(c(3, 5), 5),
+x <- html2excel(directory, ext = "*.*html", sheets = list(c(3, 5), 5),
                 read_args = list(encoding = "UTF-8"))
 
 \dontrun{
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
-x <- html2excel(url, dir = ".")
+x <- html2excel(url)
 }
+}
+\seealso{
+\code{\link{summary.html2excel}}
 }
