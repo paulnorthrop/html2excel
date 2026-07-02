@@ -59,20 +59,63 @@
 <div class="section level2">
 <h2 id="convert-html-tables-to-an-excel-file">Convert HTML Tables to an Excel File<a class="anchor" aria-label="anchor" href="#convert-html-tables-to-an-excel-file"></a>
 </h2>
-<p>Reads tables from ‘HTML’ documents. The tables are returned as a list of tibbles and may be written to ‘Excel’ files.</p>
-<p>If you are visiting multiple web pages, I recommend using the <a href="https://cran.r-project.org/package=polite" class="external-link">polite</a> package to ensure that you do this imn an appropriate way.</p>
+<p>Reads tables from HTML documents. The tables are returned as a list of tibbles and may be written to Excel files. The main function is <code><a href="reference/html2excel.html">html2excel()</a></code>. If you are visiting multiple web pages, please use the <a href="https://cran.r-project.org/package=polite" class="external-link">polite</a> package to ensure that you do this in an appropriate way.</p>
 </div>
 <div class="section level2">
 <h2 id="an-example">An example<a class="anchor" aria-label="anchor" href="#an-example"></a>
 </h2>
+<p>An example HTML file, <code>tables.html</code>, is included as an <code>html2excel</code> package system file.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/html2excel/" class="external-link">html2excel</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paulnorthrop.github.io/html2excel/" class="external-link">html2excel</a></span><span class="op">)</span></span>
+<span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tables.html"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span>
+<span><span class="co"># Extract all tables in this HTML file</span></span>
+<span><span class="va">tibbles</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/html2excel.html">html2excel</a></span><span class="op">(</span><span class="va">html</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># tibbles is a list of length one containing a list of 5 tibbles</span></span>
+<span><span class="co"># Print the 5th tibble</span></span>
+<span><span class="va">tibbles</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span></span>
+<span><span class="co">#&gt; $sheet5</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 3</span></span>
+<span><span class="co">#&gt;   Day       Time      Location                             </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                                </span></span>
+<span><span class="co">#&gt; 1 Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)</span></span>
+<span><span class="co">#&gt; 2 Thursday  2:30-5pm  Morro Bay Farmer's Market            </span></span>
+<span><span class="co">#&gt; 3 Thursday  6:10-9pm  Downtown SLO Farmer's Market         </span></span>
+<span><span class="co">#&gt; 4 Saturday  8-10:30am Farmer's Market new Embassy Suites   </span></span>
+<span><span class="co">#&gt; 5 Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)</span></span>
+<span></span>
+<span><span class="co"># We can use the sheets argument to extract only the 5th table</span></span>
+<span><span class="va">tibbles2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/html2excel.html">html2excel</a></span><span class="op">(</span><span class="va">html</span>, sheets <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">tibbles2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; $sheet1</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 3</span></span>
+<span><span class="co">#&gt;   Day       Time      Location                             </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                                </span></span>
+<span><span class="co">#&gt; 1 Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)</span></span>
+<span><span class="co">#&gt; 2 Thursday  2:30-5pm  Morro Bay Farmer's Market            </span></span>
+<span><span class="co">#&gt; 3 Thursday  6:10-9pm  Downtown SLO Farmer's Market         </span></span>
+<span><span class="co">#&gt; 4 Saturday  8-10:30am Farmer's Market new Embassy Suites   </span></span>
+<span><span class="co">#&gt; 5 Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)</span></span></code></pre></div>
+<p>The example HTML file was sourced from a webpage of Accessible Data Tables provided by California Polytechnic State University, USA. The URL is given in the following example, which shows that we can extract tables by supplying a URL to <code><a href="reference/html2excel.html">html2excel()</a></code>.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://afd.calpoly.edu/web/sample-tables"</span></span>
+<span><span class="va">tibbles3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/html2excel.html">html2excel</a></span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
+<span><span class="va">tibbles3</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#&gt; $sheet5</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#&gt; # A tibble: 5 × 3</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#&gt;   Day       Time      Location                             </span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;                                </span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#&gt; 1 Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#&gt; 2 Thursday  2:30-5pm  Morro Bay Farmer's Market            </span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="co">#&gt; 3 Thursday  6:10-9pm  Downtown SLO Farmer's Market         </span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co">#&gt; 4 Saturday  8-10:30am Farmer's Market new Embassy Suites   </span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">#&gt; 5 Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>To install the current released version from CRAN:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"html2excel"</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>

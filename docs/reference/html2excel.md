@@ -15,7 +15,7 @@ html2excel(
   ext = "*.html",
   write = TRUE,
   sheets,
-  dir,
+  dir = ".",
   read_args = list(),
   html_args = list(),
   write_args = list()
@@ -57,6 +57,8 @@ html2excel(
   sheets in the `i`th output Excel file. This argument is recycled to
   the number of output Excel files. If `sheets` is not supplied then all
   sheets are included.
+  [`summary.html2excel`](https://github.com/paulnorthrop/html2excel/reference/summary.html2excel.md)
+  provides dimensions of the tibbles read.
 
 - dir:
 
@@ -114,6 +116,16 @@ that duplicate filenames would be produced, for example, if files
 distinguished by `file_a.xlsx` and `file_b.xlsx`, and similarly if there
 are more than two identical filenames.
 
+The initial motivation for creating the `html2excel` package was to
+convert to Excel format HTML files that has mistakenly been given a
+`.xlsx` file extension. If such files are supplied by `html` then each
+output Excel file will be written to a directory `output` created in the
+directory of the respective input file.
+
+## See also
+
+[`summary.html2excel`](https://github.com/paulnorthrop/html2excel/reference/summary.html2excel.md)
+
 ## Examples
 
 ``` r
@@ -142,15 +154,15 @@ summary(t2)
 ### A directory
 
 ## Contains the .html and .mhtml files above
-dir <- system.file("extdata", package = "html2excel")
+directory <- system.file("extdata", package = "html2excel")
 # Change the ext argument to include the .mhtml file
 # Extract tables 3 and 5 from .html and table 5 from .mhtml
-x <- html2excel(dir, ext = "*.*html", sheets = list(c(3, 5), 5),
+x <- html2excel(directory, ext = "*.*html", sheets = list(c(3, 5), 5),
                 read_args = list(encoding = "UTF-8"))
 
 # \dontrun{
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
-x <- html2excel(url, dir = ".")
+x <- html2excel(url)
 # }
 ```

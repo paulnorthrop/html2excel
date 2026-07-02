@@ -12,6 +12,8 @@ is_directory(x)
 urls_files_or_directory(x)
 
 distinguish_repeated_filenames(vec)
+
+change_xlsx_directory(filename, dir = "output")
 ```
 
 ## Details

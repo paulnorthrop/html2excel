@@ -55,7 +55,7 @@ to Excel <code>.xlsx</code> files using <code><a href="https://rdrr.io/pkg/openx
 <span>  ext <span class="op">=</span> <span class="st">"*.html"</span>,</span>
 <span>  write <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">sheets</span>,</span>
-<span>  <span class="va">dir</span>,</span>
+<span>  dir <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  read_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  html_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  write_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -92,7 +92,8 @@ extensions that start with <code>htm</code> are read.</p></dd>
 of the vector or list gives the number(s) of the tables to be included as
 sheets in the <code>i</code>th output Excel file. This argument is recycled to the
 number of output Excel files. If <code>sheets</code> is not supplied then all sheets
-are included.</p></dd>
+are included. <code><a href="summary.html2excel.html">summary.html2excel</a></code> provides dimensions of the tibbles
+read.</p></dd>
 
 
 <dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
@@ -138,6 +139,15 @@ that duplicate filenames would be produced, for example, if files
 <code>file.html</code> and <code>file.mhtml</code> are read. Then the output filenames are
 distinguished by <code>file_a.xlsx</code> and <code>file_b.xlsx</code>, and similarly if there are
 more than two identical filenames.</p>
+<p>The initial motivation for creating the <code>html2excel</code> package was to convert
+to Excel format HTML files that has mistakenly been given a <code>.xlsx</code> file
+extension. If such files are supplied by <code>html</code> then each output Excel
+file will be written to a directory <code>output</code> created in the directory of the
+respective input file.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="summary.html2excel.html">summary.html2excel</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -167,16 +177,16 @@ more than two identical filenames.</p>
 <span><span class="co">### A directory</span></span>
 <span></span>
 <span><span class="co">## Contains the .html and .mhtml files above</span></span>
-<span><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span>
+<span><span class="va">directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span>
 <span><span class="co"># Change the ext argument to include the .mhtml file</span></span>
 <span><span class="co"># Extract tables 3 and 5 from .html and table 5 from .mhtml</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">dir</span>, ext <span class="op">=</span> <span class="st">"*.*html"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>,</span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">directory</span>, ext <span class="op">=</span> <span class="st">"*.*html"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>,</span>
 <span>                read_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># \dontrun{</span></span>
 <span><span class="co">### A URL</span></span>
 <span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://afd.calpoly.edu/web/sample-tables"</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">url</span>, dir <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
 <span><span class="co"># }</span></span></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

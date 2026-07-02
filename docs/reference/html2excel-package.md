@@ -1,12 +1,14 @@
 # html2excel: Convert HTML Tables to Excel Files
 
-Reads tables from 'HTML' web pages or local documents. The tables are
-returned as a list of tibbles and may be written to 'Excel' files.
+Reads tables from HTML web pages or local documents. The tables are
+returned as a list of tibbles and may be written to Excel files.
 
 ## Details
 
 The main function is
 [`html2excel`](https://github.com/paulnorthrop/html2excel/reference/html2excel.md).
+See also
+[`summary.html2excel`](https://github.com/paulnorthrop/html2excel/reference/summary.html2excel.md).
 
 ## See also
 
