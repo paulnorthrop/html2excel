@@ -72,3 +72,16 @@ distinguish_repeated_filenames <- function(vec) {
 
   return(res)
 }
+
+#' @keywords internal
+#' @rdname html2excel-internal
+change_xlsx_directory <- function(filename, dir = "output") {
+  is_xlsx <- tools::file_ext(filename) == "xlsx"
+  if (any(is_xlsx)) {
+    filename[is_xlsx] <- paste0(dirname(filename[is_xlsx]),
+                                "/", dir, "/", basename(filename))
+    dir_path <- dirname(filename[is_xlsx])
+    lapply(dir_path[!dir.exists(dir_path)], dir.create)
+  }
+  return(filename)
+}

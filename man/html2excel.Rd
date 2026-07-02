@@ -81,6 +81,12 @@ that duplicate filenames would be produced, for example, if files
 \code{file.html} and \code{file.mhtml} are read. Then the output filenames are
 distinguished by \code{file_a.xlsx} and \code{file_b.xlsx}, and similarly if there are
 more than two identical filenames.
+
+The initial motivation for creating the \code{html2excel} package was to convert
+to Excel format HTML files that has mistakenly been given a \code{.xlsx} file
+extension. If such files are supplied by \code{html} then each output Excel
+file will be written to a directory \code{output} created in the directory of the
+respective input file.
 }
 \examples{
 ### HTML files

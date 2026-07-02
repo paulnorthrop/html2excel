@@ -45,6 +45,13 @@
 #' distinguished by `file_a.xlsx` and `file_b.xlsx`, and similarly if there are
 #' more than two identical filenames.
 #'
+#' The initial motivation for creating the `html2excel` package was to convert
+#' to Excel format HTML files that has mistakenly been given a `.xlsx` file
+#' extension. If such files are supplied by `html` then each output Excel
+#' file will be written to a directory `output` created in the directory of the
+#' respective input file.
+#'
+#'
 #' @return An object of class `c("html2excel", "list")`. A list of (lists of)
 #'   tibbles created from objects returned from [`rvest::html_table`].
 #'   The names of the list are the input HTML filenames. Each list component
@@ -114,6 +121,9 @@ html2excel <- function(html, ext = "*.html", write = TRUE, sheets, dir,
   } else {
     html_output <- html
   }
+  # If the input file extension was .xlsx then write the output .xlsx files to
+  # a directory called in the same directory as the input .xlsx file "output"
+  html_output <- change_xlsx_directory(html_output)
 
   # Read each HTML file to produce an XML document
   read_args <- c(list(X = html, FUN = rvest::read_html), read_args)
@@ -126,6 +136,9 @@ html2excel <- function(html, ext = "*.html", write = TRUE, sheets, dir,
   # to select only the required sheets
   if (!missing(sheets)) {
     if (length(html) == 1) {
+      if (is.list(sheets)) {
+        sheets <- sheets[[1]]
+      }
       tibbles <- list(tibbles[[1]][sheets])
     } else {
       sheets <- rep_len(sheets, length(html))

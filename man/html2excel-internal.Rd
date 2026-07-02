@@ -6,6 +6,7 @@
 \alias{is_directory}
 \alias{urls_files_or_directory}
 \alias{distinguish_repeated_filenames}
+\alias{change_xlsx_directory}
 \title{Internal html2excel functions}
 \usage{
 is_url(x)
@@ -15,6 +16,8 @@ is_directory(x)
 urls_files_or_directory(x)
 
 distinguish_repeated_filenames(vec)
+
+change_xlsx_directory(filename, dir = "output")
 }
 \description{
 Internal html2excel functions
