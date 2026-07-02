@@ -10,8 +10,8 @@ Authors@R: c(
       role = c("aut", "cre", "cph")
     )
   )
-Description: Reads tables from 'HTML' documents. The tables are returned as a
-    list of tibbles and may be written to 'Excel' files.
+Description: Reads tables from 'HTML' web pages or local documents. The tables 
+    are returned as a list of tibbles and may be written to 'Excel' files.
 Imports: openxlsx,
     rvest,
     tools,
