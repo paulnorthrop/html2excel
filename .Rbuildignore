@@ -2,6 +2,6 @@
 ^\.Rproj\.user$
 ^\.github$
 ^logo$
-^inst/*\.xlsx$
 ^README\.Rmd$
 ^LICENSE\.md$
+^inst/extdata/*\.xlsx$
