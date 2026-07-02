@@ -1,0 +1,29 @@
+Package: html2excel
+Type: Package
+Title: Convert HTML Tables to Excel Files
+Version: 1.0.0
+Date: 2026-07-01
+Authors@R: c(
+    person(
+      "Paul", "Northrop",
+      email = "p.northrop@ucl.ac.uk",
+      role = c("aut", "cre", "cph")
+    )
+  )
+Description: Reads tables from 'HTML' documents. The tables are returned as a
+    list of tibbles and may be written to 'Excel' files.
+Imports: openxlsx,
+    rvest,
+    tools,
+    utils
+License: GPL (>= 3)
+Encoding: UTF-8
+Depends:
+    R (>= 4.1.0)
+Suggests: 
+    testthat (>= 3.0.0)
+URL: https://paulnorthrop.github.io/html2excel/, https://github.com/paulnorthrop/html2excel
+BugReports: https://github.com/paulnorthrop/html2excel/issues
+Config/testthat/edition: 3
+RoxygenNote: 7.3.3
+Roxygen: list(markdown = TRUE)
