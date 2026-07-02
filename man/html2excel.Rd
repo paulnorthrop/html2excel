@@ -117,5 +117,6 @@ x <- html2excel(dir, ext = "*.*html", sheets = list(c(3, 5), 5),
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
 \dontrun{
-x <- html2excel(url, dir = ".")}
+x <- html2excel(url, dir = ".")
+}
 }

@@ -89,7 +89,8 @@
 #' ### A URL
 #' url <- "https://afd.calpoly.edu/web/sample-tables"
 #' \dontrun{
-#' x <- html2excel(url, dir = ".")}
+#' x <- html2excel(url, dir = ".")
+#' }
 #' @export
 html2excel <- function(html, ext = "*.html", write = TRUE, sheets, dir,
                        read_args = list(), html_args = list(),
