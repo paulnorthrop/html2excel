@@ -17,6 +17,10 @@ Status](https://codecov.io/github/paulnorthrop/html2excel/coverage.svg?branch=ma
 Reads tables from ‘HTML’ documents. The tables are returned as a list of
 tibbles and may be written to ‘Excel’ files.
 
+If you are visiting multiple web pages, I recommend using the
+[polite](https://cran.r-project.org/package=polite) package to ensure
+that you do this imn an appropriate way.
+
 ## An example
 
 ``` r
