@@ -4,9 +4,9 @@
 ^logo$
 ^README\.Rmd$
 ^LICENSE\.md$
-^inst/extdata/*\.xlsx$
 ^cran_comments\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
 ^inst/extdata/output$
+^inst/extdata/t*\.xlsx$

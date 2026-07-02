@@ -2,5 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-inst/extdata/*.xlsx
 inst/extdata/output
+inst/extdata/t*.xlsx
