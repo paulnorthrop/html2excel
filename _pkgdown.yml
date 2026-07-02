@@ -1,0 +1,25 @@
+destination: docs
+
+url: https://github.com/paulnorthrop/html2excel
+
+development:
+  mode: release
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  math-rendering: mathjax
+
+reference:
+  - title: Package
+    desc: ~
+    contents:
+      - "html2excel-package"
+  - title: Convert HTML Tables to Excel Files
+    desc: ~
+    contents:
+      - "html2excel"
+  - title: Generic
+    desc: ~
+    contents:
+      - "summary.html2excel"
