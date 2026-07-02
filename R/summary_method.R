@@ -21,11 +21,11 @@ NULL
 
 #' @rdname summary.html2excel
 #' @export
-summary.html2excel <- function(x, ...) {
+summary.html2excel <- function(object, ...) {
   dim_fn <- function(i) {
-    return(X = lapply(x[[i]], FUN = dim))
+    return(X = lapply(object[[i]], FUN = dim))
   }
-  table_dimensions <- lapply(X = 1:length(x), FUN = dim_fn)
+  table_dimensions <- lapply(X = 1:length(object), FUN = dim_fn)
   names(table_dimensions) <- names(x)
   class(table_dimensions) <- "summary.evmissing"
   return(table_dimensions)

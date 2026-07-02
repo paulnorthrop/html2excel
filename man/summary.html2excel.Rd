@@ -5,15 +5,15 @@
 \alias{print.summary.html2excel}
 \title{Summarising \code{html2excel} objects}
 \usage{
-\method{summary}{html2excel}(x, ...)
+\method{summary}{html2excel}(object, ...)
 
 \method{print}{summary.html2excel}(x, ...)
 }
 \arguments{
-\item{...}{Further arguments to be passed to \code{\link{print.default}}.}
-
 \item{object}{An object inheriting from class \code{"html2excel"} returned from
 \code{\link{html2excel}}.}
+
+\item{...}{Further arguments to be passed to \code{\link{print.default}}.}
 }
 \value{
 A list containing the dimensions (number of rows and number of
