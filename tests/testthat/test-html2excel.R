@@ -1,23 +1,3 @@
-# Tiago/Portico: .xlsx are really .html.
-# Detect this and change the output file names to address this?
-# If ext = "*.xlsx" or rather if the extensions on html are .xlsx then
-# add "out" or "output" to the filename.
-
-# Replace rvest::read_html() with xml::read_html()
-
-# XML files?
-# Unlike HTML, XML does not dictate how data is displayed; it only describes the data itself
-
-# Create example data in inst, like accessr
-# Have one example for a URL, but don't run it?
-# Create tests for each type of html (files, directory, URLs)
-# Create a test for summary.html2excel()
-# Package help file: ?html2excel (minimal)
-#   I could note that Portico produces Excel files that are in fact XML/HTML files
-# README.Rmd
-# Check on Github
-# CRAN comments
-
 ## 1
 
 # Check that reading .html and .mhtml versions of the same file are equivalent
