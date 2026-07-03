@@ -7,6 +7,4 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
-^inst/extdata/output$
-^inst/extdata/t*\.xlsx$
 ^cran-comments\.md$
