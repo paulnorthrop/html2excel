@@ -8,8 +8,8 @@ html2excel(
   html,
   ext = "*.html",
   write = TRUE,
+  dir,
   sheets,
-  dir = ".",
   read_args = list(),
   html_args = list(),
   write_args = list()
@@ -19,7 +19,7 @@ html2excel(
 \item{html}{A character vector containing one of the following:
 \itemize{
 \item paths to HTML files,
-\item a path to a directory that contains HTML files,
+\item a path to a directory containing HTML files,
 \item URLs, that is, strings beginning with \code{www.}, \verb{http:} or \verb{https:}.
 }}
 
@@ -33,6 +33,20 @@ extensions that start with \code{htm} are read.}
 \item{write}{A logical scalar. Should the tibbles be written to Excel
 \code{.xlsx} files using \code{\link[openxlsx:write.xlsx]{openxlsx::write.xlsx}}?}
 
+\item{dir}{A path to a directory. If \code{write = TRUE} then \code{dir} determines
+where the Excel files are written.
+\itemize{
+\item If \code{html} contains URLs, then \code{dir} is an absolute path and must be
+supplied. To write Excel files to the current working directory use
+\code{dir = "."}.
+\item If \code{html} contains paths to HTML files or a directory containing HTML
+files, then \code{dir} is relative to the directory in which an HTML file is
+located. If \code{dir} is not supplied then Excel files are written to the
+same directory as the input HTML files.
+}
+
+If \code{dir} does not exist then it is created.}
+
 \item{sheets}{A numeric vector or list of numeric vectors. Component \code{i}
 of the vector or list gives the number(s) of the tables to be included as
 sheets in the \code{i}th output Excel file. This argument is recycled to the
@@ -40,17 +54,12 @@ number of output Excel files. If \code{sheets} is not supplied then all sheets
 are included. \code{\link{summary.html2excel}} provides dimensions of the tibbles
 read.}
 
-\item{dir}{A path to a directory. If \code{html} contains URLs then the resulting
-Excel files are written to directory \code{dir}. If \code{dir} does not exist then
-it is created.}
-
 \item{read_args}{A list of arguments for \code{\link[rvest:read_html]{rvest::read_html}}.}
 
 \item{html_args}{A list of arguments for \code{\link[rvest:html_table]{rvest::html_table}}.}
 
 \item{write_args}{A list of arguments for \code{\link[openxlsx:write.xlsx]{openxlsx::write.xlsx}}, but not
-\code{file}, as this is determined from the input HTML filenames and, for URLs,
-\code{dir}.}
+\code{file}, as this is determined from the input HTML filenames and \code{dir}.}
 }
 \value{
 An object of class \code{c("html2excel", "list")}. A list of (lists of)
@@ -76,6 +85,9 @@ HTML files are
 \item written to Excel documents using \code{\link[openxlsx:write.xlsx]{openxlsx::write.xlsx}}.
 }
 
+If \code{\link[rvest:read_html]{rvest::read_html}} fails to connect to a URL in \code{html} then a message
+is printed and \code{html} is returned.
+
 The output filename for an input HTML file \code{file.html} is usually
 \code{file.xlsx}. Exceptions are when a combination of \code{html} and \code{ext} means
 that duplicate filenames would be produced, for example, if files
@@ -98,7 +110,7 @@ mhtml <- system.file("extdata", "tables.mhtml", package = "html2excel")
 
 ## .html
 # Table 5 only
-t1 <- html2excel(html, sheets = 5)
+t1 <- html2excel(html, sheets = 5, write = FALSE)
 # The table
 t1[[1]]
 # The dimensions of the table
@@ -106,7 +118,7 @@ summary(t1)
 
 ## .mhtml
 # Pass UTF-8 encoding to avoid error "Unsupported encoding: 3DUTF-8"
-t2 <- html2excel(mhtml, read_args = list(encoding = "UTF-8"))
+t2 <- html2excel(mhtml, read_args = list(encoding = "UTF-8"), write = FALSE)
 # The same table as above
 t2[[1]][5]
 # The dimensions of all tables
@@ -119,13 +131,11 @@ directory <- system.file("extdata", package = "html2excel")
 # Change the ext argument to include the .mhtml file
 # Extract tables 3 and 5 from .html and table 5 from .mhtml
 x <- html2excel(directory, ext = "*.*html", sheets = list(c(3, 5), 5),
-                read_args = list(encoding = "UTF-8"))
+                read_args = list(encoding = "UTF-8"), write = FALSE)
 
-\dontrun{
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
-x <- html2excel(url)
-}
+x <- html2excel(url, write = FALSE)
 }
 \seealso{
 \code{\link{summary.html2excel}}
