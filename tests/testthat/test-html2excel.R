@@ -64,9 +64,17 @@ test_that("html2excel(): 1 file vs directory of 2 files", {
 
 # Examples from html2excel()
 wrong <- system.file("extdata", "wrong_extension.xlsx", package = "html2excel")
-wrong_5 <- html2excel(wrong, sheets = 5, write = FALSE)
+worked3 <- file.copy(from = wrong, to = tdir)
+temp_wrong <- file.path(tdir, basename(wrong))
+wrong_5 <- html2excel(temp_wrong, sheets = 5, write = TRUE)
 res4 <- wrong_5[[1]]$sheet1
 
 test_that("html2excel(): wrong .xlsx extension", {
   expect_equal(res1, res4)
 })
+
+## 5
+
+### A URL
+url <- "https://afd.calpoly.edu/web/sample-tables"
+x <- html2excel(url, write = FALSE)
