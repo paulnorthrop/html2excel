@@ -1,4 +1,5 @@
 ## Resubmission
+
 This is a resubmission. In this version I have:
 
 * In the DESCRIPTION file, written 'HTML' and 'Excel' in single quotes in the title
