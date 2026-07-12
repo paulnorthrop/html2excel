@@ -95,7 +95,7 @@ supplied. To write Excel files to the current working directory use
 <li><p>If <code>html</code> contains paths to HTML files or a directory containing HTML
 files, then <code>dir</code> is relative to the directory in which an HTML file is
 located. If <code>dir</code> is not supplied then Excel files are written to the
-same directory as the input HTML files.</p></li>
+respective directories supplied in <code>html</code>.</p></li>
 </ul><p>If <code>dir</code> does not exist then it is created.</p></dd>
 
 
@@ -118,7 +118,7 @@ read.</p></dd>
 
 <dt id="arg-write-args">write_args<a class="anchor" aria-label="anchor" href="#arg-write-args"></a></dt>
 <dd><p>A list of arguments for <code><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html" class="external-link">openxlsx::write.xlsx</a></code>, but not
-<code>file</code>, as this is determined from the input HTML filenames and <code>dir</code>.</p></dd>
+<code>file</code>, as this is determined from <code>html</code> and <code>dir</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

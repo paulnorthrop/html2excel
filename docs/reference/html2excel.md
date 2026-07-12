@@ -62,7 +62,7 @@ html2excel(
   - If `html` contains paths to HTML files or a directory containing
     HTML files, then `dir` is relative to the directory in which an HTML
     file is located. If `dir` is not supplied then Excel files are
-    written to the same directory as the input HTML files.
+    written to the respective directories supplied in `html`.
 
   If `dir` does not exist then it is created.
 
@@ -90,8 +90,7 @@ html2excel(
 
   A list of arguments for
   [`openxlsx::write.xlsx`](https://rdrr.io/pkg/openxlsx/man/write.xlsx.html),
-  but not `file`, as this is determined from the input HTML filenames
-  and `dir`.
+  but not `file`, as this is determined from `html` and `dir`.
 
 ## Value
 
