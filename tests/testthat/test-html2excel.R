@@ -3,7 +3,7 @@
 # Check that reading .html and .mhtml versions of the same file are equivalent
 # Also check that selecting a sheet a prior and a posteriori are equivalent
 
-# Create a temporary directory into which to out input thml files and write
+# Create a temporary directory into which to out input html files and write
 # output Excel files
 tdir <- tempdir()
 
