@@ -3,7 +3,7 @@ This is a resubmission. In this version I have:
 
 * In the DESCRIPTION file, written 'HTML' and 'Excel' in single quotes in the title
 * Unwrapped the final example of html2excel()
-* Ensured that my functions do not write by default or in my examples and tests in the user's home filespace
+* Ensured that my functions do not write by default, or in my examples and tests, in the user's home filespace
 
 ## R CMD check results
 
