@@ -9,25 +9,25 @@ tdir <- tempdir()
 
 # Examples from html2excel()
 html <- system.file("extdata", "tables.html", package = "html2excel")
-worked1 <- file.copy(from = html, to = tdir)
+worked1 <- file.copy(from = html, to = tdir, overwrite = TRUE)
 temp_html <- file.path(tdir, basename(html))
 
-t1_5 <- html2excel(temp_html, sheets = 5, write = TRUE)
-res1 <- t1_5[[1]]$sheet1
-
 mhtml <- system.file("extdata", "tables.mhtml", package = "html2excel")
-worked2 <- file.copy(from = mhtml, to = tdir)
+worked2 <- file.copy(from = mhtml, to = tdir, overwrite = TRUE)
 temp_mhtml <- file.path(tdir, basename(mhtml))
 
-t2 <- suppressWarnings(
-  html2excel(temp_mhtml, read_args = list(encoding = "UTF-8"), write = TRUE,
-             dir = "new")
-)
-res2 <- t2[[1]][5]$sheet5
-
-test_that("html2excel(): html vs mhtml", {
-  expect_equal(res1, res2)
-})
+if (worked1 && worked2) {
+  t1_5 <- html2excel(temp_html, sheets = 5, write = TRUE)
+  res1 <- t1_5[[1]]$sheet1
+  t2 <- suppressWarnings(
+    html2excel(temp_mhtml, read_args = list(encoding = "UTF-8"), write = TRUE,
+               dir = "new")
+  )
+  res2 <- t2[[1]][5]$sheet5
+  test_that("html2excel(): html vs mhtml", {
+    expect_equal(res1, res2)
+  })
+}
 
 ## 2
 
@@ -64,17 +64,45 @@ test_that("html2excel(): 1 file vs directory of 2 files", {
 
 # Examples from html2excel()
 wrong <- system.file("extdata", "wrong_extension.xlsx", package = "html2excel")
-worked3 <- file.copy(from = wrong, to = tdir)
+worked3 <- file.copy(from = wrong, to = tdir, overwrite = TRUE)
 temp_wrong <- file.path(tdir, basename(wrong))
-wrong_5 <- html2excel(temp_wrong, sheets = 5, write = TRUE)
-res4 <- wrong_5[[1]]$sheet1
 
-test_that("html2excel(): wrong .xlsx extension", {
-  expect_equal(res1, res4)
-})
+if (worked3) {
+  wrong_5 <- html2excel(temp_wrong, sheets = 5, write = TRUE)
+  res4 <- wrong_5[[1]]$sheet1
+
+  test_that("html2excel(): wrong .xlsx extension", {
+    expect_equal(res1, res4)
+  })
+}
 
 ## 5
 
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
 x <- html2excel(url, write = FALSE)
+should_be_true <- inherits(x, "html2excel") ||
+  x == "https://afd.calpoly.edu/web/sample-tables"
+test_that("html2excel(): correct URL", {
+  expect_true(should_be_true)
+})
+
+### A made up URL
+made_up_url <- "https://a_totally_made_up_url/web/sample-tables"
+made_up_x <- html2excel(made_up_url, write = FALSE)
+test_that("html2excel(): made up URL", {
+  expect_equal(made_up_x, made_up_url)
+})
+
+
+## Tidy up
+
+unlink(file.path(tdir, "new", "tables.xlsx"))
+unlink(file.path(tdir, "new"), recursive = TRUE)
+unlink(file.path(tdir, "wrong_extension.xlsx"))
+unlink(file.path(tdir, "output", "wrong_extension.xlsx"))
+unlink(file.path(tdir, "output"), recursive = TRUE)
+unlink(file.path(tdir, "tables.xlsx"))
+unlink(file.path(tdir, "tables.html"))
+unlink(file.path(tdir, "tables.mhtml"))
+
