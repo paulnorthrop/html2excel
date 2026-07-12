@@ -14,8 +14,8 @@ html2excel(
   html,
   ext = "*.html",
   write = TRUE,
+  dir,
   sheets,
-  dir = ".",
   read_args = list(),
   html_args = list(),
   write_args = list()
@@ -30,7 +30,7 @@ html2excel(
 
   - paths to HTML files,
 
-  - a path to a directory that contains HTML files,
+  - a path to a directory containing HTML files,
 
   - URLs, that is, strings beginning with `www.`, `http:` or `https:`.
 
@@ -50,6 +50,22 @@ html2excel(
   using
   [`openxlsx::write.xlsx`](https://rdrr.io/pkg/openxlsx/man/write.xlsx.html)?
 
+- dir:
+
+  A path to a directory. If `write = TRUE` then `dir` determines where
+  the Excel files are written.
+
+  - If `html` contains URLs, then `dir` is an absolute path and must be
+    supplied. To write Excel files to the current working directory use
+    `dir = "."`.
+
+  - If `html` contains paths to HTML files or a directory containing
+    HTML files, then `dir` is relative to the directory in which an HTML
+    file is located. If `dir` is not supplied then Excel files are
+    written to the same directory as the input HTML files.
+
+  If `dir` does not exist then it is created.
+
 - sheets:
 
   A numeric vector or list of numeric vectors. Component `i` of the
@@ -59,12 +75,6 @@ html2excel(
   sheets are included.
   [`summary.html2excel`](https://github.com/paulnorthrop/html2excel/reference/summary.html2excel.md)
   provides dimensions of the tibbles read.
-
-- dir:
-
-  A path to a directory. If `html` contains URLs then the resulting
-  Excel files are written to directory `dir`. If `dir` does not exist
-  then it is created.
 
 - read_args:
 
@@ -81,7 +91,7 @@ html2excel(
   A list of arguments for
   [`openxlsx::write.xlsx`](https://rdrr.io/pkg/openxlsx/man/write.xlsx.html),
   but not `file`, as this is determined from the input HTML filenames
-  and, for URLs, `dir`.
+  and `dir`.
 
 ## Value
 
@@ -108,6 +118,10 @@ HTML files are
 
 - written to Excel documents using
   [`openxlsx::write.xlsx`](https://rdrr.io/pkg/openxlsx/man/write.xlsx.html).
+
+If [`rvest::read_html`](http://xml2.r-lib.org/reference/read_xml.md)
+fails to connect to a URL in `html` then a message is printed and `html`
+is returned.
 
 The output filename for an input HTML file `file.html` is usually
 `file.xlsx`. Exceptions are when a combination of `html` and `ext` means
@@ -137,19 +151,72 @@ mhtml <- system.file("extdata", "tables.mhtml", package = "html2excel")
 
 ## .html
 # Table 5 only
-t1 <- html2excel(html, sheets = 5)
+t1 <- html2excel(html, sheets = 5, write = FALSE)
 # The table
 t1[[1]]
+#> $sheet1
+#> # A tibble: 5 × 3
+#>   Day       Time      Location                             
+#>   <chr>     <chr>     <chr>                                
+#> 1 Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)
+#> 2 Thursday  2:30-5pm  Morro Bay Farmer's Market            
+#> 3 Thursday  6:10-9pm  Downtown SLO Farmer's Market         
+#> 4 Saturday  8-10:30am Farmer's Market new Embassy Suites   
+#> 5 Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)
+#> 
 # The dimensions of the table
 summary(t1)
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`$sheet1
+#> [1] 5 3
+#> 
+#> 
+#> attr(,"class")
+#> [1] "summary.html2excel"
 
 ## .mhtml
 # Pass UTF-8 encoding to avoid error "Unsupported encoding: 3DUTF-8"
-t2 <- html2excel(mhtml, read_args = list(encoding = "UTF-8"))
+t2 <- html2excel(mhtml, read_args = list(encoding = "UTF-8"), write = FALSE)
+#> Warning: NAs introduced by coercion
+#> Warning: NAs introduced by coercion
+#> Warning: NAs introduced by coercion
+#> Warning: NAs introduced by coercion
 # The same table as above
 t2[[1]][5]
+#> $sheet5
+#> # A tibble: 5 × 3
+#>   Day       Time      Location                             
+#>   <chr>     <chr>     <chr>                                
+#> 1 Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)
+#> 2 Thursday  2:30-5pm  Morro Bay Farmer's Market            
+#> 3 Thursday  6:10-9pm  Downtown SLO Farmer's Market         
+#> 4 Saturday  8-10:30am Farmer's Market new Embassy Suites   
+#> 5 Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)
+#> 
 # The dimensions of all tables
 summary(t2)
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet1
+#> [1] 6 3
+#> 
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet2
+#> [1] 3 4
+#> 
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet3
+#> [1] 3 3
+#> 
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet4
+#> [1] 4 3
+#> 
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet5
+#> [1] 5 3
+#> 
+#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet6
+#> [1] 19  5
+#> 
+#> 
+#> attr(,"class")
+#> [1] "summary.html2excel"
 
 ### A directory
 
@@ -158,11 +225,13 @@ directory <- system.file("extdata", package = "html2excel")
 # Change the ext argument to include the .mhtml file
 # Extract tables 3 and 5 from .html and table 5 from .mhtml
 x <- html2excel(directory, ext = "*.*html", sheets = list(c(3, 5), 5),
-                read_args = list(encoding = "UTF-8"))
+                read_args = list(encoding = "UTF-8"), write = FALSE)
+#> Warning: NAs introduced by coercion
+#> Warning: NAs introduced by coercion
+#> Warning: NAs introduced by coercion
+#> Warning: NAs introduced by coercion
 
-# \dontrun{
 ### A URL
 url <- "https://afd.calpoly.edu/web/sample-tables"
-x <- html2excel(url)
-# }
+x <- html2excel(url, write = FALSE)
 ```

@@ -17,7 +17,7 @@ to Excel .xlsx files using openxlsx::write.xlsx."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">html2excel</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,8 +54,8 @@ to Excel <code>.xlsx</code> files using <code><a href="https://rdrr.io/pkg/openx
 <span>  <span class="va">html</span>,</span>
 <span>  ext <span class="op">=</span> <span class="st">"*.html"</span>,</span>
 <span>  write <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">dir</span>,</span>
 <span>  <span class="va">sheets</span>,</span>
-<span>  dir <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  read_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  html_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  write_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -68,7 +68,7 @@ to Excel <code>.xlsx</code> files using <code><a href="https://rdrr.io/pkg/openx
 
 <dl><dt id="arg-html">html<a class="anchor" aria-label="anchor" href="#arg-html"></a></dt>
 <dd><p>A character vector containing one of the following:</p><ul><li><p>paths to HTML files,</p></li>
-<li><p>a path to a directory that contains HTML files,</p></li>
+<li><p>a path to a directory containing HTML files,</p></li>
 <li><p>URLs, that is, strings beginning with <code>www.</code>, <code>http:</code> or <code>https:</code>.</p></li>
 </ul></dd>
 
@@ -87,6 +87,18 @@ extensions that start with <code>htm</code> are read.</p></dd>
 <code>.xlsx</code> files using <code><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html" class="external-link">openxlsx::write.xlsx</a></code>?</p></dd>
 
 
+<dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
+<dd><p>A path to a directory. If <code>write = TRUE</code> then <code>dir</code> determines
+where the Excel files are written.</p><ul><li><p>If <code>html</code> contains URLs, then <code>dir</code> is an absolute path and must be
+supplied. To write Excel files to the current working directory use
+<code>dir = "."</code>.</p></li>
+<li><p>If <code>html</code> contains paths to HTML files or a directory containing HTML
+files, then <code>dir</code> is relative to the directory in which an HTML file is
+located. If <code>dir</code> is not supplied then Excel files are written to the
+same directory as the input HTML files.</p></li>
+</ul><p>If <code>dir</code> does not exist then it is created.</p></dd>
+
+
 <dt id="arg-sheets">sheets<a class="anchor" aria-label="anchor" href="#arg-sheets"></a></dt>
 <dd><p>A numeric vector or list of numeric vectors. Component <code>i</code>
 of the vector or list gives the number(s) of the tables to be included as
@@ -94,12 +106,6 @@ sheets in the <code>i</code>th output Excel file. This argument is recycled to t
 number of output Excel files. If <code>sheets</code> is not supplied then all sheets
 are included. <code><a href="summary.html2excel.html">summary.html2excel</a></code> provides dimensions of the tibbles
 read.</p></dd>
-
-
-<dt id="arg-dir">dir<a class="anchor" aria-label="anchor" href="#arg-dir"></a></dt>
-<dd><p>A path to a directory. If <code>html</code> contains URLs then the resulting
-Excel files are written to directory <code>dir</code>. If <code>dir</code> does not exist then
-it is created.</p></dd>
 
 
 <dt id="arg-read-args">read_args<a class="anchor" aria-label="anchor" href="#arg-read-args"></a></dt>
@@ -112,8 +118,7 @@ it is created.</p></dd>
 
 <dt id="arg-write-args">write_args<a class="anchor" aria-label="anchor" href="#arg-write-args"></a></dt>
 <dd><p>A list of arguments for <code><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html" class="external-link">openxlsx::write.xlsx</a></code>, but not
-<code>file</code>, as this is determined from the input HTML filenames and, for URLs,
-<code>dir</code>.</p></dd>
+<code>file</code>, as this is determined from the input HTML filenames and <code>dir</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -133,7 +138,9 @@ If <code>write = TRUE</code> then a character vector containing the file paths t
     <p>HTML files are</p><ul><li><p>read using <code><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">rvest::read_html</a></code>,</p></li>
 <li><p>converted to tables (tibbles) using <code><a href="https://rvest.tidyverse.org/reference/html_table.html" class="external-link">rvest::html_table</a></code>,</p></li>
 <li><p>written to Excel documents using <code><a href="https://rdrr.io/pkg/openxlsx/man/write.xlsx.html" class="external-link">openxlsx::write.xlsx</a></code>.</p></li>
-</ul><p>The output filename for an input HTML file <code>file.html</code> is usually
+</ul><p>If <code><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">rvest::read_html</a></code> fails to connect to a URL in <code>html</code> then a message
+is printed and <code>html</code> is returned.</p>
+<p>The output filename for an input HTML file <code>file.html</code> is usually
 <code>file.xlsx</code>. Exceptions are when a combination of <code>html</code> and <code>ext</code> means
 that duplicate filenames would be produced, for example, if files
 <code>file.html</code> and <code>file.mhtml</code> are read. Then the output filenames are
@@ -152,42 +159,98 @@ respective input file.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co">### HTML files</span></span>
-<span></span>
-<span><span class="co">## .html and .mhtml versions of the URL example below</span></span>
-<span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tables.html"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span>
-<span><span class="va">mhtml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tables.mhtml"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## .html</span></span>
-<span><span class="co"># Table 5 only</span></span>
-<span><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">html</span>, sheets <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
-<span><span class="co"># The table</span></span>
-<span><span class="va">t1</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co"># The dimensions of the table</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">## .mhtml</span></span>
-<span><span class="co"># Pass UTF-8 encoding to avoid error "Unsupported encoding: 3DUTF-8"</span></span>
-<span><span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">mhtml</span>, read_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co"># The same table as above</span></span>
-<span><span class="va">t2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span></span>
-<span><span class="co"># The dimensions of all tables</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">t2</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co">### A directory</span></span>
-<span></span>
-<span><span class="co">## Contains the .html and .mhtml files above</span></span>
-<span><span class="va">directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span>
-<span><span class="co"># Change the ext argument to include the .mhtml file</span></span>
-<span><span class="co"># Extract tables 3 and 5 from .html and table 5 from .mhtml</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">directory</span>, ext <span class="op">=</span> <span class="st">"*.*html"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>,</span>
-<span>                read_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># \dontrun{</span></span>
-<span><span class="co">### A URL</span></span>
-<span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://afd.calpoly.edu/web/sample-tables"</span></span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span>
-<span><span class="co"># }</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">### HTML files</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## .html and .mhtml versions of the URL example below</span></span></span>
+<span class="r-in"><span><span class="va">html</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tables.html"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mhtml</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"tables.mhtml"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## .html</span></span></span>
+<span class="r-in"><span><span class="co"># Table 5 only</span></span></span>
+<span class="r-in"><span><span class="va">t1</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">html</span>, sheets <span class="op">=</span> <span class="fl">5</span>, write <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># The table</span></span></span>
+<span class="r-in"><span><span class="va">t1</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheet1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Day       Time      Location                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Thursday  2:30-5pm  Morro Bay Farmer's Market            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Thursday  6:10-9pm  Downtown SLO Farmer's Market         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Saturday  8-10:30am Farmer's Market new Embassy Suites   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="co"># The dimensions of the table</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`$sheet1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "summary.html2excel"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## .mhtml</span></span></span>
+<span class="r-in"><span><span class="co"># Pass UTF-8 encoding to avoid error "Unsupported encoding: 3DUTF-8"</span></span></span>
+<span class="r-in"><span><span class="va">t2</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">mhtml</span>, read_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span>, write <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-in"><span><span class="co"># The same table as above</span></span></span>
+<span class="r-in"><span><span class="va">t2</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheet5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Day       Time      Location                             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Wednesday 3-6 pm    Cal Poly Campus (follow U-Pick Signs)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Thursday  2:30-5pm  Morro Bay Farmer's Market            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Thursday  6:10-9pm  Downtown SLO Farmer's Market         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Saturday  8-10:30am Farmer's Market new Embassy Suites   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Saturday  11am-2pm  Cal Poly Campus (follow U-Pick signs)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="co"># The dimensions of all tables</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">t2</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19  5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "summary.html2excel"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### A directory</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Contains the .html and .mhtml files above</span></span></span>
+<span class="r-in"><span><span class="va">directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, package <span class="op">=</span> <span class="st">"html2excel"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Change the ext argument to include the .mhtml file</span></span></span>
+<span class="r-in"><span><span class="co"># Extract tables 3 and 5 from .html and table 5 from .mhtml</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">directory</span>, ext <span class="op">=</span> <span class="st">"*.*html"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                read_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"UTF-8"</span><span class="op">)</span>, write <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>NAs introduced by coercion</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### A URL</span></span></span>
+<span class="r-in"><span><span class="va">url</span> <span class="op">&lt;-</span> <span class="st">"https://afd.calpoly.edu/web/sample-tables"</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">html2excel</span><span class="op">(</span><span class="va">url</span>, write <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+</code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
