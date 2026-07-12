@@ -27,7 +27,7 @@
 #'   * If `html` contains paths to HTML files or a directory containing HTML
 #'     files, then `dir` is relative to the directory in which an HTML file is
 #'     located. If `dir` is not supplied then Excel files are written to the
-#'     same directory as the input HTML files.
+#'     respective directories supplied in `html`.
 #'
 #'   If `dir` does not exist then it is created.
 #' @param sheets A numeric vector or list of numeric vectors. Component `i`
@@ -39,7 +39,7 @@
 #' @param read_args A list of arguments for [`rvest::read_html`].
 #' @param html_args A list of arguments for [`rvest::html_table`].
 #' @param write_args A list of arguments for [`openxlsx::write.xlsx`], but not
-#'   `file`, as this is determined from the input HTML filenames and `dir`.
+#'   `file`, as this is determined from `html` and `dir`.
 #'
 #' @details HTML files are
 #'

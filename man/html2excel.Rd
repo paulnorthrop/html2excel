@@ -42,7 +42,7 @@ supplied. To write Excel files to the current working directory use
 \item If \code{html} contains paths to HTML files or a directory containing HTML
 files, then \code{dir} is relative to the directory in which an HTML file is
 located. If \code{dir} is not supplied then Excel files are written to the
-same directory as the input HTML files.
+respective directories supplied in \code{html}.
 }
 
 If \code{dir} does not exist then it is created.}
@@ -59,7 +59,7 @@ read.}
 \item{html_args}{A list of arguments for \code{\link[rvest:html_table]{rvest::html_table}}.}
 
 \item{write_args}{A list of arguments for \code{\link[openxlsx:write.xlsx]{openxlsx::write.xlsx}}, but not
-\code{file}, as this is determined from the input HTML filenames and \code{dir}.}
+\code{file}, as this is determined from \code{html} and \code{dir}.}
 }
 \value{
 An object of class \code{c("html2excel", "list")}. A list of (lists of)
