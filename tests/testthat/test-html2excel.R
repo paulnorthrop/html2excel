@@ -94,7 +94,6 @@ test_that("html2excel(): made up URL", {
   expect_equal(made_up_x, made_up_url)
 })
 
-
 ## Tidy up
 
 unlink(file.path(tdir, "new", "tables.xlsx"))
