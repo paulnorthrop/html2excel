@@ -165,8 +165,8 @@ t1[[1]]
 #> 
 # The dimensions of the table
 summary(t1)
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.html`$sheet1
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.html`
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.html`$sheet1
 #> [1] 5 3
 #> 
 #> 
@@ -194,23 +194,23 @@ t2[[1]][5]
 #> 
 # The dimensions of all tables
 summary(t2)
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet1
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet1
 #> [1] 6 3
 #> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet2
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet2
 #> [1] 3 4
 #> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet3
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet3
 #> [1] 3 3
 #> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet4
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet4
 #> [1] 4 3
 #> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet5
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet5
 #> [1] 5 3
 #> 
-#> $`C:/Users/Paul/AppData/Local/R/win-library/4.5/html2excel/extdata/tables.mhtml`$sheet6
+#> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet6
 #> [1] 19  5
 #> 
 #> 
