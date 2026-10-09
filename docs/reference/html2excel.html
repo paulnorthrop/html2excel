@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Convert HTML Tables to Excel Files — html2excel"><meta name="description" content="Reads tables from HTML documents using rvest::read_html and
+</script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Convert HTML Tables to Excel Files — html2excel"><meta name="description" content="Reads tables from HTML documents using rvest::read_html and
 rvest::html_table. The tables are returned as tibbles and may be written
 to Excel .xlsx files using openxlsx::write.xlsx."><meta property="og:description" content="Reads tables from HTML documents using rvest::read_html and
 rvest::html_table. The tables are returned as tibbles and may be written
@@ -17,7 +17,7 @@ to Excel .xlsx files using openxlsx::write.xlsx."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">html2excel</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,6 +26,7 @@ to Excel .xlsx files using openxlsx::write.xlsx."></head><body>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="nav-link" href="https://github.com/paulnorthrop/html2excel/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -182,8 +183,8 @@ respective input file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># The dimensions of the table</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.html`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.html`$sheet1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.html`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.html`$sheet1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -211,23 +212,23 @@ respective input file.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># The dimensions of all tables</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">t2</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.mhtml`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.mhtml`$sheet1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.mhtml`$sheet2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.mhtml`$sheet3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.mhtml`$sheet4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 4 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.mhtml`$sheet5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5 3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/RtmpKqktxU/temp_libpath354448f673b4/html2excel/extdata/tables.mhtml`$sheet6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`C:/Users/Paul/AppData/Local/Temp/Rtmp4Gvsys/temp_libpath657c38ef6137/html2excel/extdata/tables.mhtml`$sheet6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 19  5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -257,11 +258,11 @@ respective input file.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Paul Northrop.</p>
+  <p>Developed by Paul J. Northrop.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer></div>

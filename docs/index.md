@@ -24,6 +24,7 @@ An example HTML file, `tables.html`, is included as an `html2excel`
 package system file.
 
 ``` r
+
 library(html2excel)
 html <- system.file("extdata", "tables.html", package = "html2excel")
 # Extract all tables in this HTML file
@@ -63,6 +64,7 @@ tables by supplying a URL to
 [`html2excel()`](https://github.com/paulnorthrop/html2excel/reference/html2excel.md).
 
 ``` r
+
 url <- "https://afd.calpoly.edu/web/sample-tables"
 tibbles3 <- html2excel(url)
 tibbles3[[1]][5]
@@ -85,5 +87,6 @@ tibbles3[[1]][5]
 To install the current released version from CRAN:
 
 ``` r
+
 install.packages("html2excel")
 ```
